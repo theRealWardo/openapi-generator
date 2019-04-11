@@ -368,7 +368,6 @@ public abstract class AbstractGoCodegen extends DefaultCodegen implements Codege
             }
         }
 
-        boolean addedOptionalImport = false;
         boolean addedTimeImport = false;
         boolean addedOSImport = false;
         for (CodegenOperation operation : operations) {
@@ -389,10 +388,6 @@ public abstract class AbstractGoCodegen extends DefaultCodegen implements Codege
 
                 // import "optionals" package if the parameter is optional
                 if (!param.required) {
-                    if (!addedOptionalImport) {
-                        imports.add(createMapping("import", "github.com/antihax/optional"));
-                        addedOptionalImport = true;
-                    }
                     // We need to specially map Time type to the optionals package
                     if ("time.Time".equals(param.dataType)) {
                         param.vendorExtensions.put("x-optionalDataType", "Time");
